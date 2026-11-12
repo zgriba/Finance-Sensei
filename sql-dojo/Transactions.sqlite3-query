@@ -1,0 +1,28 @@
+-- database: ./finance_sensei.db
+
+SELECT * FROM transactions;
+SELECT description, amount
+FROM transactions
+WHERE type='expense'
+ORDER BY amount DESC;
+
+SELECT COUNT(*)
+FROM transactions
+WHERE type='income';
+
+SELECT SUM(amount)
+FROM transactions
+WHERE type='expense';
+
+SELECT type, COUNT(*), SUM(amount)
+FROM transactions
+GROUP BY type;
+
+INSERT INTO transactions (id, type, description, amount)
+VALUES (4, 'expense', 'Internet', 39.00);
+
+INSERT INTO transactions (id, type, description, amount)
+VALUES (5, 'expense', 'Mobyle', 28.00);
+
+INSERT INTO transactions (id, type, description, amount)
+VALUES (6, 'expense', 'Car Insurance', 60.00);

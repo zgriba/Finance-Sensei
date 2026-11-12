@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- We set the language to German (de) so browsers and screen readers know the primary language of the UI -->
+<html lang="de">
+<head>
+    <!-- Character encoding set to UTF-8 to support all special characters (like ä, ö, ü, ß) -->
+    <meta charset="UTF-8">
+    
+    <!-- Ensures the app is responsive and scales correctly on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Application title that appears in the browser tab -->
+    <title>Finance Sensei</title>
+    
+    <!-- Link to our future CSS file for styling -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER: The top section of our application ------------------------------------------------------------------->
+    <header>
+        <h1>Finance Sensei</h1>
+        
+        <!-- 
+          TODO: Add JavaScript logic for i18n language switching later. 
+          For now, this is just an inactive placeholder for our future multilingual feature.
+        -->
+        <nav id="language-switcher">
+            <label for="lang-select">Sprache: </label>
+            <select id="lang-select" disabled>
+                <option value="de">Deutsch</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="ro">Română</option>
+            </select>
+        </nav>
+    </header>
+
+    <!-- MAIN: The core content area where our modules will live ------------------------------------------------------->
+    <main>
+
+        <!-- First section. Room A: The Dashboard -->
+        <section id="dashboard">
+        
+            <h2>Aktueller Kontostand</h2>
+            <!-- A "box" that will hold the calculated total amount. -->
+            <div class="balance-card"></div>
+
+        </section>
+
+        <!-- Second section. Room B: Transaction Form -->
+        <section id="transaction-form">
+
+            <!-- The interactive container that groups the inputs. -->
+            <form>
+                <!-- Text field for the expense description with placeholder -->
+                <input type="text" placeholder="Beschreibung (z.B. Internetrechnung)">
+                
+                <!-- Numeric field for the amount of money with placeholder -->
+                <input type="number" placeholder="Betrag (€)">
+                
+                <!-- The submit button -->
+                <button type="submit">Hinzufügen</button>
+            </form>
+
+        </section>
+
+        <!-- Third section. Room C: Transaction History -->
+        <section id="transaction-history">
+
+            <!-- A minimalist tabular structure in which we will arrange past transactions chronologically. -->
+            <div class="history-list"></div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer (Information Area) --------------------------------------------------------------------------------------------------->
+    <footer>
+        <!-- A simple line for the current year and the copyright ("© 2026 Finance Sensei"). -->
+        <p>© 2026 Finance Sensei</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

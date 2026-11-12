@@ -1,0 +1,181 @@
+/* ==========================================================================
+   1. GLOBAL VARIABLES (Theme & Colors)
+   These variables act as the central control panel for our design.
+   ========================================================================== */
+:root {
+    --primary-color: #2c3e50;      /* Dark, stable blue for headers */
+    --accent-color: #27ae60;       /* Calm, Zen green for action buttons */
+    --expense-color: #c0392b;      /* Muted red for expenses */
+    --background-color: #f4f6f7;   /* Light gray/earthy tone for the app body */
+    --card-bg: #ffffff;            /* Pure white for data containers */
+    --text-main: #333333;          /* Dark gray for readable text */
+    
+    /* Typography */
+    --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ==========================================================================
+   2. CSS RESET & BASE RULES
+   Removing browser defaults to start with a clean slate.
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-main);
+    
+    /* Flexbox layout to keep the footer at the bottom */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 100% of the Viewport Height */
+}
+/* ==========================================================================
+   3. MACRO-LAYOUT (Main Structure)
+   Centering the main content and giving it breathing room.
+   ========================================================================== */
+main {
+    max-width: 800px;
+    margin: 2rem auto; /* Centers the container horizontally */
+    padding: 0 1rem;
+    flex-grow: 1; /* This forces the main content to stretch, pushing the footer down */
+}
+
+/* ==========================================================================
+   4. DASHBOARD COMPONENT (Room A)
+   Visual styling for the current balance display.
+   ========================================================================== */
+#dashboard {
+    text-align: center;
+    margin-bottom: 3rem; /* Adds space before the next section */
+}
+
+.balance-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px; /* Smooth, rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow to lift the card */
+    margin-top: 1rem;
+    min-height: 100px; /* Temporary height until we add JS numbers */
+}
+
+/* ==========================================================================
+   5. TRANSACTION FORM (Room B)
+   Styling the inputs to be modern and touch-friendly.
+   ========================================================================== */
+#transaction-form form {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    
+    /* Flexbox allows us to stack the inputs vertically */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Consistent space between each input field */
+}
+
+#transaction-form input {
+    padding: 1rem;
+    border: 1px solid #dcdde1;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: var(--font-family);
+}
+
+/* Removing the harsh outline that browsers add when clicking an input */
+#transaction-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+#transaction-form button {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    padding: 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for the hover state */
+}
+
+/* The :hover pseudo-class activates when the user's mouse is over the button */
+#transaction-form button:hover {
+    background-color: #1e8449; /* A slightly darker Zen green */
+}
+/* ==========================================================================
+   6. HEADER & NAVIGATION
+   Styling the top bar and the language switcher placeholder.
+   ========================================================================== */
+header {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 1.5rem;
+    text-align: center;
+    /* Flexbox to align elements neatly */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+/* Styling the inactive language switcher so it looks clean */
+#language-switcher select {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: none;
+    font-family: var(--font-family);
+    cursor: not-allowed; /* Indicates it is currently inactive */
+}
+
+/* ==========================================================================
+   7. FOOTER
+   The base of our application.
+   ========================================================================== */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #e2e6ea;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    /* Crucial trick: pushes the footer to the bottom of the screen */
+    margin-top: auto; 
+}
+
+/* ==========================================================================
+   8. RESPONSIVE DESIGN (Media Queries)
+   Adapting the layout for larger screens (tablets and desktops).
+   ========================================================================== */
+@media (min-width: 768px) {
+    /* On wide screens, put the title on the left and language switcher on the right */
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 1.5rem 3rem;
+    }
+
+    /* On wide screens, form inputs can sit side-by-side on a single line */
+    #transaction-form form {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    #transaction-form input {
+        flex: 1; /* Makes the inputs stretch to fill available horizontal space */
+    }
+
+    #transaction-form button {
+        flex: 0 0 150px; /* Keeps the button at a fixed width of 150px */
+    }
+}
