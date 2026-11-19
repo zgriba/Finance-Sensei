@@ -79,16 +79,19 @@ main {
     gap: 1.5rem; /* Consistent space between each input field */
 }
 
-#transaction-form input {
+#transaction-form input,
+#transaction-form select {
     padding: 1rem;
     border: 1px solid #dcdde1;
     border-radius: 6px;
     font-size: 1rem;
     font-family: var(--font-family);
+    background-color: #ffffff;
 }
 
-/* Removing the harsh outline that browsers add when clicking an input */
-#transaction-form input:focus {
+/* Removing the harsh outline that browsers add when clicking an input or select */
+#transaction-form input:focus,
+#transaction-form select:focus {
     outline: none;
     border-color: var(--primary-color);
 }
@@ -171,8 +174,9 @@ footer {
         align-items: flex-end;
     }
 
-    #transaction-form input {
-        flex: 1; /* Makes the inputs stretch to fill available horizontal space */
+    #transaction-form input,
+        #transaction-form select {
+            flex: 1; /* Makes the inputs and select stretch equally */
     }
 
     #transaction-form button {

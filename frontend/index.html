@@ -11,7 +11,7 @@
     <!-- Application title that appears in the browser tab -->
     <title>Finance Sensei</title>
     
-    <!-- Link to our future CSS file for styling -->
+    <!-- Link to CSS file for styling -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -51,12 +51,23 @@
         <section id="transaction-form">
 
             <!-- The interactive container that groups the inputs. -->
-            <form>
+            <form id="tx-form">
                 <!-- Text field for the expense description with placeholder -->
-                <input type="text" placeholder="Beschreibung (z.B. Internetrechnung)">
+                <input type="text" id="desc-input" placeholder="Beschreibung (z.B. Miete, Gehalt)" required>
                 
-                <!-- Numeric field for the amount of money with placeholder -->
-                <input type="number" placeholder="Betrag (€)">
+                <!-- Numeric field for the amount of money (step="0.01" allows cents like 65.50) -->
+                <input type="number" id="amount-input" step="0.01" min="0.01" placeholder="Betrag (€)" required>
+
+                <!-- NEW: Category selector mirroring our SQL 'categories' table -->
+                <select id="category-select" required>
+                    <option value="" disabled selected>Kategorie wählen...</option>
+                    <option value="3" data-type="income">💰 Einkommen</option>
+                    <option value="1" data-type="expense">🏡 Wohnen</option>
+                    <option value="2" data-type="expense">⚡ Nebenkosten</option>
+                    <option value="5" data-type="expense">🛡️ Versicherungen</option>
+                    <option value="6" data-type="expense">🍎 Lebensmittel</option>
+                    <option value="4" data-type="expense">🎮 Freizeit & Hobby</option>
+                </select>
                 
                 <!-- The submit button -->
                 <button type="submit">Hinzufügen</button>
