@@ -69,6 +69,7 @@ main {
    ========================================================================== */
 #transaction-form form {
     background-color: var(--card-bg);
+    margin-bottom: 3rem; /* Adds space before the next section */
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -177,6 +178,7 @@ footer {
     #transaction-form input,
         #transaction-form select {
             flex: 1; /* Makes the inputs and select stretch equally */
+            min-width: 0;
     }
 
     #transaction-form button {
