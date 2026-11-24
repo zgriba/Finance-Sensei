@@ -69,55 +69,48 @@ function updateDashboard() {
         total += transactions[i].amount;
     }
 
-    // Choose the balance color: Green if we are in the positive/at zero, Red if we are in the negative
-    const color = total >= 0 ? '#27ae60' : '#c0392b';
+    const statusClass = total >= 0 ? 'is-income' : 'is-expense';
 
     // Display the result in the Dashboard
-    balanceDisplay.innerHTML = `<h3 style="color: ${color}; font-size: 2rem;">${total.toFixed(2)} €</h3>`;
+    balanceDisplay.textContent = '';
+
+    const balanceHeading = document.createElement('h3');
+    balanceHeading.classList.add('balance-amount', statusClass);
+    balanceHeading.textContent = `${total.toFixed(2)} €`;
+
+    balanceDisplay.appendChild(balanceHeading);
 }
 
 function renderHistory() {
     // Clear the list before redrawing it
-    historyList.innerHTML = '';
+    historyList.textContent = '';
 
     // We iterate through each transaction and create a visual card
     transactions.forEach(transaction => {
-        const item = document.createElement('div');
-
-        // We check whether it is an income or an expense
         const isIncome = transaction.amount >= 0;
         const sign = isIncome ? '+' : ''; // Negative numbers already have a '-' in front
-        const amountColor = isIncome ? '#27ae60' : '#c0392b';
+        const statusClass = isIncome ? 'is-income' : 'is-expense';
 
-        // Styling the row in the history
-        item.style.padding = '1rem';
-        item.style.backgroundColor = '#ffffff';
-        item.style.marginBottom = '0.75rem';
-        item.style.borderRadius = '8px';
-        item.style.boxShadow = '0 2px 5px rgba(0,0,0,0.03)';
-        item.style.display = 'flex';
-        item.style.justifyContent = 'space-between';
-        item.style.alignItems = 'center';
-        item.style.borderLeft = isIncome ? '5px solid #27ae60' : '5px solid #c0392b';
+        
+       const item = document.createElement('div');
+        item.classList.add('history-item', statusClass);
 
-        // Display the Description + Category on the left, and the colored Amount on the right
         const details = document.createElement('div');
+        details.classList.add('history-details');
 
         const description = document.createElement('strong');
-        description.style.display = 'block';
-        description.style.fontSize = '1.05rem';
+        description.classList.add('history-desc');
         description.textContent = transaction.description;
 
         const category = document.createElement('small');
-        category.style.color = '#7f8c8d';
+        category.classList.add('history-category');
         category.textContent = transaction.category_name;
 
         details.appendChild(description);
         details.appendChild(category);
 
         const amount = document.createElement('strong');
-        amount.style.color = amountColor;
-        amount.style.fontSize = '1.1rem';
+        amount.classList.add('history-amount');
         amount.textContent = `${sign}${transaction.amount.toFixed(2)} €`;
 
         item.appendChild(details);

@@ -1,22 +1,122 @@
 /* ==========================================================================
-   1. GLOBAL VARIABLES (Theme & Colors)
-   These variables act as the central control panel for our design.
+   0. LOCAL FONTS (@font-face — 100% Local & DSGVO-konform)
+   ========================================================================== */
+
+    /* --- SERIF (The Spirit of the Temple) --- */
+    @font-face {
+        font-family: 'Cinzel';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('assets/fonts/cinzel-v26-latin_latin-ext-regular.woff2') format('woff2');
+   }
+    @font-face {
+        font-family: 'Cinzel';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('assets/fonts/cinzel-v26-latin_latin-ext-700.woff2') format('woff2');
+   }
+   @font-face {
+        font-family: 'Cormorant Garamond';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('assets/fonts/cormorant-garamond-v21-latin_latin-ext-regular.woff2') format('woff2');
+   }
+    @font-face {
+        font-family: 'Cormorant Garamond';
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url('assets/fonts/cormorant-garamond-v21-latin_latin-ext-italic.woff2') format('woff2');
+   }
+    @font-face {
+        font-family: 'Marcellus';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('assets/fonts/marcellus-v14-latin_latin-ext-regular.woff2') format('woff2');
+   }
+    /* --- SANS-SERIF (Modern, Digits & UI) --- */
+    @font-face {
+        font-family: 'Plus Jakarta Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('assets/fonts/plus-jakarta-sans-v12-latin_latin-ext-regular.woff2') format('woff2');
+   }
+    @font-face {
+        font-family: 'Plus Jakarta Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url('assets/fonts/plus-jakarta-sans-v12-latin_latin-ext-600.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('assets/fonts/inter-v20-latin_latin-ext-regular.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('assets/fonts/inter-v20-latin_latin-ext-700.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('assets/fonts/dm-sans-v17-latin_latin-ext-regular.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url('assets/fonts/dm-sans-v17-latin_latin-ext-500.woff2') format('woff2');
+    }
+
+
+/* ==========================================================================
+   1. GLOBAL VARIABLES (Angeles-Temple Ecosystem — Jin Ku Protocol)
    ========================================================================== */
 :root {
-    --primary-color: #2c3e50;      /* Dark, stable blue for headers */
-    --accent-color: #27ae60;       /* Calm, Zen green for action buttons */
-    --expense-color: #c0392b;      /* Muted red for expenses */
-    --background-color: #f4f6f7;   /* Light gray/earthy tone for the app body */
-    --card-bg: #ffffff;            /* Pure white for data containers */
-    --text-main: #333333;          /* Dark gray for readable text */
-    
+    /* Dynamic Typographic Hierarchy (3 Serif + 3 Sans-Serif) */
+    --font-title: 'Cinzel', Georgia, serif;                     /* Imperial Titles & Buttons */
+    --font-scroll: 'Cormorant Garamond', Georgea, serif;        /* Footer, quotes, subheadings */
+    --font-accent: 'Marcellus', Georgia, serif;                 /* Sections & noble labels */
+    --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;    /* Main text & Form */
+    --font-numbers: 'Inter', system-ui, sans-serif;             /* Numbers & Sums of money */
+    --font--ui: 'DM Sans', system-ui, sans-serif;               /* Metadata, data, badges */
+
+    /* The Temple's base colors */
+    --traditional-red: #a50b0b;
+    --banner-shadow: #420303;
+    --gold-ornaments: #d4af37;
+    --black-Kasagi: #161618;
+    --text-light: #f0f4f8;
+    --text-primary: #abaaa5;
+    --floor-dark: #0a0a14;
+
     /* Typography */
     --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+    /* Dedicated tokens for Finance Sensei (Dashboards & Money Semantics) */
+    --card-bg: rgba(16, 16, 20, 0.92);
+    --gold-border: rgba(212, 175, 55, 0.35);
+    --gold-glow: rgba(212, 175, 55, 0.25);
+    --income-color: #4ade80;
+    --expense-color: #ef4444;
 }
 
 /* ==========================================================================
-   2. CSS RESET & BASE RULES
-   Removing browser defaults to start with a clean slate.
+   2. CSS RESET & BASE RULES (Background of the Kakejiku Scroll)
    ========================================================================== */
 * {
     margin: 0;
@@ -25,9 +125,19 @@
 }
 
 body {
-    font-family: var(--font-family);
-    background-color: var(--background-color);
-    color: var(--text-main);
+    font-family: var(--font-body);
+    color: var(--text-light);
+    color-scheme: dark; /* Makes native dropdowns and scrollbar dark-mode compatible */
+
+    /* Exactly the red silk and obsidian gradient from .kakejiku-body */
+    background: linear-gradient(
+        180deg,
+        var(--banner-shadow) 0%,
+        rgba(165, 11, 11, 0.85) 20%,
+        rgba(22, 22, 24, 0.95) 85%,
+        var(--banner-shadow) 100%
+    );
+    background-attachment: fixed;
     
     /* Flexbox layout to keep the footer at the bottom */
     display: flex;
@@ -39,7 +149,8 @@ body {
    Centering the main content and giving it breathing room.
    ========================================================================== */
 main {
-    max-width: 800px;
+    width: 100%;
+    max-width: 850px;
     margin: 2rem auto; /* Centers the container horizontally */
     padding: 0 1rem;
     flex-grow: 1; /* This forces the main content to stretch, pushing the footer down */
@@ -51,77 +162,106 @@ main {
    ========================================================================== */
 #dashboard {
     text-align: center;
-    margin-bottom: 3rem; /* Adds space before the next section */
+    margin-bottom: 2.5rem; /* Adds space before the next section */
+}
+
+#dashboard h2 {
+    font-family: var(--font-accent);
+    color: var(--gold-ornaments);
+    letter-spacing: 2px;
+    font-size: 1.3rem;
+    text-transform: uppercase;
 }
 
 .balance-card {
     background-color: var(--card-bg);
     padding: 2rem;
-    border-radius: 12px; /* Smooth, rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow to lift the card */
+    border-radius: 8px; /* Smooth, rounded corners */
+    border: 1px solid var(--gold-ornaments);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07), 0 0 15px var(--gold-glow);
     margin-top: 1rem;
-    min-height: 100px; /* Temporary height until we add JS numbers */
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-numbers);
+    font-variant-numeric: tabular-nums; /* Align the digits to the millimeter! */
 }
 
 /* ==========================================================================
    5. TRANSACTION FORM (Room B)
-   Styling the inputs to be modern and touch-friendly.
    ========================================================================== */
 #transaction-form form {
     background-color: var(--card-bg);
-    margin-bottom: 3rem; /* Adds space before the next section */
+    margin-bottom: 2.5rem; /* Adds space before the next section */
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    border: 1px solid var(--gold-border);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65);
     
     /* Flexbox allows us to stack the inputs vertically */
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Consistent space between each input field */
+    gap: 1.25rem; /* Consistent space between each input field */
 }
 
 #transaction-form input,
 #transaction-form select {
-    padding: 1rem;
-    border: 1px solid #dcdde1;
+    padding: 0.95rem 1rem;
+    border: 1px solid var(--gold-border);
     border-radius: 6px;
     font-size: 1rem;
-    font-family: var(--font-family);
-    background-color: #ffffff;
+    font-family: var(--font-body);
+    background-color: var(--black-Kasagi);
+    color: var(--text-light);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Removing the harsh outline that browsers add when clicking an input or select */
+#transaction-form input::placeholder {
+    color: var(--text-primary)
+}
+
 #transaction-form input:focus,
 #transaction-form select:focus {
     outline: none;
-    border-color: var(--primary-color);
+    border-color: var(--gold-ornaments);
+    box-shadow: 0 0 10px var(--gold-glow);
 }
 
+/* The Imperial Button — the .wing-btn style from Angeles-Temple */
 #transaction-form button {
-    background-color: var(--accent-color);
-    color: #ffffff;
-    padding: 1rem;
-    border: none;
+    background-color: var(--traditional-red);
+    color: var(--text-light);
+    padding: 0.95rem 1.2rem;
+    border: 1px solid var(--gold-ornaments);
     border-radius: 6px;
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-family: var(--font-title);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition for the hover state */
+    transition: all 0.3s ease;
 }
 
 /* The :hover pseudo-class activates when the user's mouse is over the button */
 #transaction-form button:hover {
-    background-color: #1e8449; /* A slightly darker Zen green */
+    background-color: var(--banner-shadow);
+    color: var(--gold-ornaments);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.45); 
 }
+
 /* ==========================================================================
    6. HEADER & NAVIGATION
    Styling the top bar and the language switcher placeholder.
    ========================================================================== */
 header {
-    background-color: var(--primary-color);
-    color: #ffffff;
+    background-color: var(--black-Kasagi);
+    color: var(--gold-ornaments);
+    border-bottom: 2px solid var(--gold-ornaments);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     padding: 1.5rem;
     text-align: center;
+
     /* Flexbox to align elements neatly */
     display: flex;
     flex-direction: column;
@@ -130,16 +270,26 @@ header {
 }
 
 header h1 {
-    font-size: 1.8rem;
+    font-family: var(--font-title);
+    font-size: 1.9rem;
+    letter-spacing: 2.5px;
     margin: 0;
+}
+
+#language-switcher label {
+    font-family: var(--font-scroll);
+    color: var(--text-primary);
+    font-size: 1.05rem;
 }
 
 /* Styling the inactive language switcher so it looks clean */
 #language-switcher select {
-    padding: 0.5rem;
+    padding: 0.45rem 0.6rem;
     border-radius: 4px;
-    border: none;
-    font-family: var(--font-family);
+    border: 1px solid var(--gold-border);
+    background-color: var(--floor-dark);
+    color: var(--text-primary);
+    font-family: var(--font--ui);
     cursor: not-allowed; /* Indicates it is currently inactive */
 }
 
@@ -150,18 +300,104 @@ header h1 {
 footer {
     text-align: center;
     padding: 1rem;
-    background-color: #e2e6ea;
-    color: #7f8c8d;
-    font-size: 0.9rem;
+    background-color: var(--black-Kasagi);
+    border-top: 1px solid var(--gold-border);
+    color: var(--text-primary);
+    font-family: var(--font-scroll);
+    font-size: 1.05rem;
+    font-style: italic;
     /* Crucial trick: pushes the footer to the bottom of the screen */
     margin-top: auto; 
 }
 
 /* ==========================================================================
-   8. RESPONSIVE DESIGN (Media Queries)
-   Adapting the layout for larger screens (tablets and desktops).
+   7B. BALANCE VALUE & TRANSACTION HISTORY (Room A & Room C)
    ========================================================================== */
-@media (min-width: 768px) {
+
+    .balance-amount {
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-family: var(--font-numbers);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.5px;
+   }
+
+   .balance-amount.is-income {
+    color: var(--income-color);
+   }
+
+   .balance-amount.is-expense {
+    color: var(--expense-color);
+   }
+
+   .history-item {
+    padding: 1rem 1.25rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--gold-border);
+    border-left-width: 4px;
+    border-radius: 8px;
+    margin-bottom: 0.85rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+   }
+
+   .history-item:hover {
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.75), 0 0 12px var(--gold-glow);
+    transform: translateY(-2px); 
+   }
+
+   .history-item.is-income {
+    border-left-color: var(--income-color);
+}
+
+.history-item.is-expense {
+    border-left-color: var(--expense-color);
+}
+
+   .history-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+   }
+
+   .history-desc {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-light)
+   }
+
+   .history-category {
+    font-family: var(--font--ui);
+    font-size: 0.85rem;
+    color: var(--text-primary)
+   }
+
+   .history-amount {
+    font-family: var(--font-numbers);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.15rem;
+    font-weight: 700;
+    white-space: nowrap;
+   }
+
+   .history-item.is-income .history-amount {
+    color: var(--income-color);
+   }
+   
+   .history-item.is-expense .history-amount {
+    color: var(--expense-color);
+   }
+
+/* ==========================================================================
+   8. RESPONSIVE DESIGN (Media Queries)
+   ========================================================================== */
+    @media (min-width: 768px) {
     /* On wide screens, put the title on the left and language switcher on the right */
     header {
         flex-direction: row;
@@ -172,7 +408,7 @@ footer {
     /* On wide screens, form inputs can sit side-by-side on a single line */
     #transaction-form form {
         flex-direction: row;
-        align-items: flex-end;
+        align-items: stretch;
     }
 
     #transaction-form input,
@@ -182,6 +418,6 @@ footer {
     }
 
     #transaction-form button {
-        flex: 0 0 150px; /* Keeps the button at a fixed width of 150px */
+        flex: 0 0 160px; /* Keeps the button at a fixed width of 150px */
     }
 }
