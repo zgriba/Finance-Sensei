@@ -182,6 +182,8 @@ main {
     margin-top: 1rem;
     min-height: 100px;
     display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
     justify-content: center;
     align-items: center;
     font-family: var(--font-numbers);
@@ -314,27 +316,27 @@ footer {
    7B. BALANCE VALUE & TRANSACTION HISTORY (Room A & Room C)
    ========================================================================== */
 
-    .balance-amount {
+.balance-amount {
     font-size: 2.2rem;
     font-weight: 700;
     font-family: var(--font-numbers);
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.5px;
-   }
+}
 
-   .balance-amount.is-income {
+.balance-amount.is-income {
     color: var(--income-color);
-   }
+}
 
-   .balance-amount.is-expense {
+.balance-amount.is-expense {
     color: var(--expense-color);
-   }
+}
 
-   .history-item {
+.history-item {
     padding: 1rem 1.25rem;
     background-color: var(--card-bg);
     border: 1px solid var(--gold-border);
-    border-left-width: 4px;
+
     border-radius: 8px;
     margin-bottom: 0.85rem;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
@@ -344,60 +346,136 @@ footer {
     align-items: center;
     gap: 1rem;
     transition: box-shadow 0.25s ease, transform 0.2s ease;
-   }
+}
 
-   .history-item:hover {
+.history-item:hover {
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.75), 0 0 12px var(--gold-glow);
     transform: translateY(-2px); 
-   }
-
-   .history-item.is-income {
-    border-left-color: var(--income-color);
 }
 
-.history-item.is-expense {
-    border-left-color: var(--expense-color);
-}
-
-   .history-details {
+.history-details {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-   }
+    margin-right: auto
+}
 
-   .history-desc {
+.history-desc {
     font-family: var(--font-body);
     font-size: 1.05rem;
     font-weight: 600;
     color: var(--text-light)
-   }
+}
 
-   .history-category {
+.history-category {
     font-family: var(--font--ui);
     font-size: 0.85rem;
     color: var(--text-primary)
-   }
+}
 
-   .history-amount {
+.history-date {
+    font-family: var(--font--ui);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.78rem;
+    color: var(--text-primary);
+    opacity: 0.75;
+}
+
+.history-amount {
     font-family: var(--font-numbers);
     font-variant-numeric: tabular-nums;
     font-size: 1.15rem;
     font-weight: 700;
     white-space: nowrap;
-   }
+}
 
-   .history-item.is-income .history-amount {
+.history-item.is-income .history-amount {
     color: var(--income-color);
-   }
+}
    
-   .history-item.is-expense .history-amount {
+.history-item.is-expense .history-amount {
     color: var(--expense-color);
-   }
+}
+
+.delete-btn {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0; /* Prevents the button from being squashed on narrow screens */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--black-Kasagi);
+    color: var(--text-primary);
+    border: 1px solid var(--gold-border);
+    border-radius: 4px;
+    font-family: var(--font-title);
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.delete-btn:hover {
+    background-color: var(--traditional-red);
+    color: var(--gold-ornaments);
+    border-color: var(--gold-border);
+    box-shadow: 0 0 12px var(--gold-glow);
+}
+
+.balance-breakdown {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    width: 100%;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gold-border);
+}
+
+.breakdoun-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.breakdown-label {
+    font-family: var(--font--ui);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+}
+
+.breakdown-value {
+    font-family: var(--font-numbers);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.breakdown-value.is-income {
+    color: var(--income-color);
+}
+
+.breakdown-value.is-expense {
+    color: var(--expense-color);
+}
+
+.history-empty {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-family: var(--font-scroll);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    opacity: 0.8;
+}
 
 /* ==========================================================================
    8. RESPONSIVE DESIGN (Media Queries)
    ========================================================================== */
-    @media (min-width: 768px) {
+@media (min-width: 768px) {
     /* On wide screens, put the title on the left and language switcher on the right */
     header {
         flex-direction: row;
@@ -420,4 +498,5 @@ footer {
     #transaction-form button {
         flex: 0 0 160px; /* Keeps the button at a fixed width of 150px */
     }
+
 }
