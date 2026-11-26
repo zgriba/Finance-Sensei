@@ -11,11 +11,25 @@ const historyList = document.querySelector('.history-list');
 // ==========================================================================
 // 2. APPLICATION STATE (Application memory)
 // ==========================================================================
+const STORAGE_KEY = 'finance_sensei_transactions';
 let transactions = [];
 
 // ==========================================================================
 // 3. BUSINESS LOGIC (The brain of the application)
 // ==========================================================================
+
+function saveTransactions() {
+    const serializedData = JSON.stringify(transactions);
+    localStorage.setItem(STORAGE_KEY, serializedData);
+}
+
+function loadTransactions() {
+    const savedData = localStorage.getItem(STORAGE_KEY);
+
+    if (savedData !== null) {
+        transactions = JSON.parse(savedData);
+    }
+} 
 
 function addTransaction(event) {
     // Prevent the page from reloading when the form is submitted
@@ -53,6 +67,7 @@ function addTransaction(event) {
 
     // 6. Add the transaction to memory
     transactions.push(transaction);
+    saveTransactions();
 
     // 7. Update the screen (Dashboard + History)
     updateDashboard();
@@ -125,5 +140,7 @@ function renderHistory() {
 // ==========================================================================
 transactionform.addEventListener('submit', addTransaction);
 
-// Initialize the Dashboard with €0.00 when the application starts
+// Upon application startup: load data from the vault and draw the screen
+loadTransactions();
 updateDashboard();
+renderHistory();
